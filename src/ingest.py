@@ -5,12 +5,53 @@ Pokemon TCG y las indexa en la base de datos vectorial (Chroma).
 Uso:
     python -m src.ingest
 """
+import time
+
 import requests
 
-from src.config import POKEMON_SET_ID
+from src.config import POKEMON_SET_ID, POKEMON_TCG_API_KEY
 from src.vector_store import VectorStore
 
 POKEMON_TCG_API_URL = "https://api.pokemontcg.io/v2/cards"
+PAGE_SIZE = 250
+MAX_RETRIES = 5
+BACKOFF_SECONDS = 3  # crece exponencialmente: 3, 6, 12, 24, 48...
+
+
+def _get_with_retry(params: dict) -> dict:
+    """Hace la petición a la API con reintentos y backoff exponencial.
+
+    La API pública de pokemontcg.io es conocida por responder de forma
+    intermitente con errores 5xx (502/503/504). En vez de fallar al primer
+    error transitorio, reintentamos varias veces antes de abortar.
+    """
+    headers = {"X-Api-Key": POKEMON_TCG_API_KEY} if POKEMON_TCG_API_KEY else {}
+
+    last_error = None
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            response = requests.get(
+                POKEMON_TCG_API_URL, params=params, headers=headers, timeout=30
+            )
+            if response.status_code >= 500:
+                raise requests.exceptions.HTTPError(
+                    f"{response.status_code} Server Error", response=response
+                )
+            response.raise_for_status()
+            return response.json()
+        except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError,
+                 requests.exceptions.Timeout) as exc:
+            last_error = exc
+            if attempt == MAX_RETRIES:
+                break
+            wait = BACKOFF_SECONDS * (2 ** (attempt - 1))
+            print(f"  Intento {attempt}/{MAX_RETRIES} falló ({exc}). "
+                  f"Reintentando en {wait}s...")
+            time.sleep(wait)
+
+    raise RuntimeError(
+        f"No se pudo consultar la API de Pokemon TCG tras {MAX_RETRIES} intentos."
+    ) from last_error
 
 
 def fetch_cards(set_id: str) -> list[dict]:
@@ -18,17 +59,15 @@ def fetch_cards(set_id: str) -> list[dict]:
     cards = []
     page = 1
     while True:
-        response = requests.get(
-            POKEMON_TCG_API_URL,
-            params={"q": f"set.id:{set_id}", "page": page, "pageSize": 250},
-            timeout=30,
+        payload = _get_with_retry(
+            {"q": f"set.id:{set_id}", "page": page, "pageSize": PAGE_SIZE}
         )
-        response.raise_for_status()
-        payload = response.json()
         batch = payload.get("data", [])
-        if not batch:
-            break
         cards.extend(batch)
+        # Si la página trae menos cartas que el tamaño pedido, ya no hay más
+        # páginas: evitamos pedir una página extra de más.
+        if len(batch) < PAGE_SIZE:
+            break
         page += 1
     return cards
 
