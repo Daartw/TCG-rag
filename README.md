@@ -142,11 +142,20 @@ Ver `.env.example` para la lista completa.
 
 ## Uso de inteligencia artificial en el desarrollo
 
-Declarar en esta sección, según lo exigido por la pauta de la evaluación, qué
-herramientas de IA se usaron durante el desarrollo. La versión desplegable
-(catálogo completo, API web, frontend y configuración de despliegue) se
-desarrolló con apoyo de Claude (Anthropic); indicar aquí qué partes fueron
-diseñadas, revisadas y validadas directamente por el equipo.
+En conformidad con la pauta de la evaluación, se declara el uso de herramientas
+de IA generativa durante el desarrollo:
+
+| Etapa | Responsable | Uso de IA |
+|---|---|---|
+| Versión inicial (set Evolving Skies, CLI) | Equipo | Diseño del pipeline RAG, estructura del proyecto, ingesta con reintentos ante errores 5xx e informe técnico, realizados por el equipo. |
+| Versión desplegable (catálogo completo y web) | Equipo, con apoyo de Claude (Anthropic) | Se usó Claude como asistente de programación para ampliar la ingesta a todos los sets, implementar la búsqueda híbrida (SQLite + Chroma) y los filtros en español, crear la API web y el frontend, y preparar la configuración de despliegue (Docker, Caddy, Render) y las pruebas automatizadas. |
+| Redacción de documentación | Equipo, con apoyo de IA | Apoyo en la redacción de este README. |
+
+**Revisión y validación por parte del equipo:** el código generado con apoyo de
+IA fue revisado antes de integrarse al repositorio, y su funcionamiento se
+verificó con las pruebas automatizadas (`pytest`) y con consultas reales al
+sistema (ver *Evidencia de pruebas*). El equipo es responsable de las decisiones
+de diseño y del contenido final entregado.
 
 ## Evidencia de pruebas
 
