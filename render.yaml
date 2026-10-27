@@ -1,0 +1,18 @@
+# Despliegue en Render (https://render.com) con un clic: "New > Blueprint".
+# Después agrega tu dominio en Settings > Custom Domains (HTTPS incluido).
+# Nota: el plan gratuito (512 MB) queda justo; se recomienda "starter" o superior.
+services:
+  - type: web
+    name: tcg-rag
+    runtime: docker
+    plan: starter
+    healthCheckPath: /api/health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: POKEMON_TCG_API_KEY
+        sync: false
+      - key: SITE_NAME
+        value: PokéDex TCG
+      - key: CHAT_RATE_LIMIT_PER_MIN
+        value: "15"

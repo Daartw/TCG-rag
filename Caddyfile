@@ -1,0 +1,26 @@
+{
+	email {$ACME_EMAIL}
+}
+
+# Dominio principal (HTTPS automático)
+{$DOMAIN} {
+	encode zstd gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Frame-Options "SAMEORIGIN"
+		-Server
+	}
+
+	# Imágenes espejadas localmente: caché larga
+	@images path /images/*
+	header @images Cache-Control "public, max-age=604800"
+
+	reverse_proxy app:8000
+}
+
+# Opcional: redirige www.tudominio.com -> tudominio.com
+# (descomenta solo si creaste también el registro DNS de www)
+# www.{$DOMAIN} {
+# 	redir https://{$DOMAIN}{uri} permanent
+# }

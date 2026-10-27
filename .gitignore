@@ -2,5 +2,5 @@
 __pycache__/
 *.pyc
 .env
-data/chroma_db/
+data/
 .pytest_cache/

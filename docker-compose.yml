@@ -1,0 +1,39 @@
+# Despliegue en un VPS con tu dominio y HTTPS automático (Let's Encrypt vía Caddy).
+#
+#   1. Apunta un registro DNS A (y AAAA si tienes IPv6) de tu dominio a la IP del servidor.
+#   2. cp .env.example .env   y completa DOMAIN, ACME_EMAIL y tu API key del LLM.
+#   3. docker compose up -d --build
+#
+services:
+  app:
+    build: .
+    image: tcg-rag:latest
+    env_file: .env
+    restart: unless-stopped
+    expose:
+      - "8000"
+    volumes:
+      # Solo se usa si espejas las imágenes localmente (scripts/mirror_images.py)
+      - card-images:/app/data/images
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN:?Define DOMAIN en .env}
+      ACME_EMAIL: ${ACME_EMAIL:?Define ACME_EMAIL en .env para Lets Encrypt}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  card-images:
+  caddy-data:
+  caddy-config:

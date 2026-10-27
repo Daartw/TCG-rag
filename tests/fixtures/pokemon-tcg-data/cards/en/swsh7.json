@@ -1,0 +1,1222 @@
+[
+ {
+  "id": "swsh7-18",
+  "name": "Flareon VMAX",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "VMAX",
+   "Single Strike"
+  ],
+  "hp": "320",
+  "types": [
+   "Fire"
+  ],
+  "evolvesFrom": "Flareon V",
+  "rules": [
+   "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+  ],
+  "attacks": [
+   {
+    "name": "Max Detonate",
+    "cost": [
+     "Fire",
+     "Colorless",
+     "Colorless"
+    ],
+    "convertedEnergyCost": 3,
+    "damage": "100×",
+    "text": "Discard the top 5 cards of your deck. This attack does 100 damage for each Energy card you discarded in this way."
+   }
+  ],
+  "weaknesses": [
+   {
+    "type": "Water",
+    "value": "×2"
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "18",
+  "artist": "5ban Graphics",
+  "rarity": "Rare Holo VMAX",
+  "nationalPokedexNumbers": [
+   136
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/18.png",
+   "large": "https://images.pokemontcg.io/swsh7/18_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-94",
+  "name": "Umbreon V",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Basic",
+   "V",
+   "Single Strike"
+  ],
+  "hp": "200",
+  "types": [
+   "Darkness"
+  ],
+  "rules": [
+   "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+  ],
+  "attacks": [
+   {
+    "name": "Mean Look",
+    "cost": [
+     "Darkness"
+    ],
+    "convertedEnergyCost": 1,
+    "damage": "30",
+    "text": "During your opponent's next turn, the Defending Pokémon can't retreat."
+   },
+   {
+    "name": "Moonlight Blade",
+    "cost": [
+     "Darkness",
+     "Colorless",
+     "Colorless"
+    ],
+    "convertedEnergyCost": 3,
+    "damage": "80+",
+    "text": "If this Pokémon has any damage counters on it, this attack does 80 more damage."
+   }
+  ],
+  "weaknesses": [
+   {
+    "type": "Grass",
+    "value": "×2"
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "94",
+  "artist": "5ban Graphics",
+  "rarity": "Rare Holo V",
+  "nationalPokedexNumbers": [
+   197
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/94.png",
+   "large": "https://images.pokemontcg.io/swsh7/94_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-95",
+  "name": "Umbreon VMAX",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "VMAX",
+   "Single Strike"
+  ],
+  "hp": "310",
+  "types": [
+   "Darkness"
+  ],
+  "evolvesFrom": "Umbreon V",
+  "rules": [
+   "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+  ],
+  "abilities": [
+   {
+    "name": "Dark Signal",
+    "text": "When you play this Pokémon from your hand to evolve 1 of your Pokémon during your turn, you may switch 1 of your opponent's Benched Pokémon with their Active Pokémon.",
+    "type": "Ability"
+   }
+  ],
+  "attacks": [
+   {
+    "name": "Max Darkness",
+    "cost": [
+     "Darkness",
+     "Colorless",
+     "Colorless"
+    ],
+    "convertedEnergyCost": 3,
+    "damage": "160",
+    "text": ""
+   }
+  ],
+  "weaknesses": [
+   {
+    "type": "Grass",
+    "value": "×2"
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "95",
+  "artist": "AKIRA EGAWA",
+  "rarity": "Rare Holo VMAX",
+  "nationalPokedexNumbers": [
+   197
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/95.png",
+   "large": "https://images.pokemontcg.io/swsh7/95_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-110",
+  "name": "Rayquaza V",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Basic",
+   "V",
+   "Rapid Strike"
+  ],
+  "hp": "210",
+  "types": [
+   "Dragon"
+  ],
+  "rules": [
+   "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+  ],
+  "attacks": [
+   {
+    "name": "Dragon Pulse",
+    "cost": [
+     "Lightning"
+    ],
+    "convertedEnergyCost": 1,
+    "damage": "40",
+    "text": "Discard the top 2 cards of your deck."
+   },
+   {
+    "name": "Spiral Burst",
+    "cost": [
+     "Fire",
+     "Lightning"
+    ],
+    "convertedEnergyCost": 2,
+    "damage": "20+",
+    "text": "You may discard up to 2 basic Fire Energy or up to 2 basic Lightning Energy from this Pokémon. This attack does 80 more damage for each card you discarded in this way."
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "110",
+  "artist": "PLANETA Mochizuki",
+  "rarity": "Rare Holo V",
+  "nationalPokedexNumbers": [
+   384
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/110.png",
+   "large": "https://images.pokemontcg.io/swsh7/110_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-111",
+  "name": "Rayquaza VMAX",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "VMAX",
+   "Rapid Strike"
+  ],
+  "hp": "320",
+  "types": [
+   "Dragon"
+  ],
+  "evolvesFrom": "Rayquaza V",
+  "rules": [
+   "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+  ],
+  "abilities": [
+   {
+    "name": "Azure Pulse",
+    "text": "Once during your turn, you may discard your hand and draw 3 cards.",
+    "type": "Ability"
+   }
+  ],
+  "attacks": [
+   {
+    "name": "Max Burst",
+    "cost": [
+     "Fire",
+     "Lightning"
+    ],
+    "convertedEnergyCost": 2,
+    "damage": "20+",
+    "text": "You may discard any amount of basic Fire Energy or any amount of basic Lightning Energy from this Pokémon. This attack does 80 more damage for each card you discarded in this way."
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "111",
+  "artist": "PLANETA Mochizuki",
+  "rarity": "Rare Holo VMAX",
+  "nationalPokedexNumbers": [
+   384
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/111.png",
+   "large": "https://images.pokemontcg.io/swsh7/111_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-123",
+  "name": "Duraludon VMAX",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "VMAX",
+   "Single Strike"
+  ],
+  "hp": "330",
+  "types": [
+   "Dragon"
+  ],
+  "evolvesFrom": "Duraludon V",
+  "rules": [
+   "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+  ],
+  "abilities": [
+   {
+    "name": "Skyscraper",
+    "text": "Prevent all damage done to this Pokémon by attacks from your opponent's Pokémon that have Special Energy attached.",
+    "type": "Ability"
+   }
+  ],
+  "attacks": [
+   {
+    "name": "G-Max Pulverization",
+    "cost": [
+     "Fighting",
+     "Metal",
+     "Metal"
+    ],
+    "convertedEnergyCost": 3,
+    "damage": "220",
+    "text": "This attack's damage isn't affected by any effects on your opponent's Active Pokémon."
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 3,
+  "number": "123",
+  "artist": "PLANETA Mochizuki",
+  "rarity": "Rare Holo VMAX",
+  "nationalPokedexNumbers": [
+   884
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/123.png",
+   "large": "https://images.pokemontcg.io/swsh7/123_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-142",
+  "name": "Boost Shake",
+  "supertype": "Trainer",
+  "subtypes": [
+   "Item"
+  ],
+  "rules": [
+   "Search your deck for a card that evolves from 1 of your Pokémon and put it onto that Pokémon to evolve it. Then, shuffle your deck. You can use this card during your first turn or on a Pokémon that was put into play this turn. Your turn ends.",
+   "You may play any number of Item cards during your turn."
+  ],
+  "number": "142",
+  "artist": "sadaji",
+  "rarity": "Uncommon",
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/142.png",
+   "large": "https://images.pokemontcg.io/swsh7/142_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-143",
+  "name": "Copycat",
+  "supertype": "Trainer",
+  "subtypes": [
+   "Supporter"
+  ],
+  "rules": [
+   "Shuffle your hand into your deck. Then, draw a card for each card in your opponent's hand.",
+   "You may play only 1 Supporter card during your turn."
+  ],
+  "number": "143",
+  "artist": "Sanosuke Sakuma",
+  "rarity": "Uncommon",
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/143.png",
+   "large": "https://images.pokemontcg.io/swsh7/143_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-154",
+  "name": "Rescue Carrier",
+  "supertype": "Trainer",
+  "subtypes": [
+   "Item"
+  ],
+  "rules": [
+   "Put up to 2 Pokémon, each with 90 HP or less, from your discard pile into your hand.",
+   "You may play any number of Item cards during your turn."
+  ],
+  "number": "154",
+  "artist": "Ryo Ueda",
+  "rarity": "Uncommon",
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/154.png",
+   "large": "https://images.pokemontcg.io/swsh7/154_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-188",
+  "name": "Umbreon V",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Basic",
+   "V",
+   "Single Strike"
+  ],
+  "hp": "200",
+  "types": [
+   "Darkness"
+  ],
+  "rules": [
+   "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+  ],
+  "attacks": [
+   {
+    "name": "Mean Look",
+    "cost": [
+     "Darkness"
+    ],
+    "convertedEnergyCost": 1,
+    "damage": "30",
+    "text": "During your opponent's next turn, the Defending Pokémon can't retreat."
+   },
+   {
+    "name": "Moonlight Blade",
+    "cost": [
+     "Darkness",
+     "Colorless",
+     "Colorless"
+    ],
+    "convertedEnergyCost": 3,
+    "damage": "80+",
+    "text": "If this Pokémon has any damage counters on it, this attack does 80 more damage."
+   }
+  ],
+  "weaknesses": [
+   {
+    "type": "Grass",
+    "value": "×2"
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "188",
+  "artist": "5ban Graphics",
+  "rarity": "Rare Ultra",
+  "nationalPokedexNumbers": [
+   197
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/188.png",
+   "large": "https://images.pokemontcg.io/swsh7/188_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-189",
+  "name": "Umbreon V",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Basic",
+   "V",
+   "Single Strike"
+  ],
+  "hp": "200",
+  "types": [
+   "Darkness"
+  ],
+  "rules": [
+   "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+  ],
+  "attacks": [
+   {
+    "name": "Mean Look",
+    "cost": [
+     "Darkness"
+    ],
+    "convertedEnergyCost": 1,
+    "damage": "30",
+    "text": "During your opponent's next turn, the Defending Pokémon can't retreat."
+   },
+   {
+    "name": "Moonlight Blade",
+    "cost": [
+     "Darkness",
+     "Colorless",
+     "Colorless"
+    ],
+    "convertedEnergyCost": 3,
+    "damage": "80+",
+    "text": "If this Pokémon has any damage counters on it, this attack does 80 more damage."
+   }
+  ],
+  "weaknesses": [
+   {
+    "type": "Grass",
+    "value": "×2"
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "189",
+  "artist": "Teeziro",
+  "rarity": "Rare Ultra",
+  "nationalPokedexNumbers": [
+   197
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/189.png",
+   "large": "https://images.pokemontcg.io/swsh7/189_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-191",
+  "name": "Dragonite V",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Basic",
+   "V"
+  ],
+  "hp": "230",
+  "types": [
+   "Dragon"
+  ],
+  "rules": [
+   "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+  ],
+  "attacks": [
+   {
+    "name": "Shred",
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "convertedEnergyCost": 2,
+    "damage": "50",
+    "text": "This attack's damage isn't affected by any effects on your opponent's Active Pokémon."
+   },
+   {
+    "name": "Dragon Gale",
+    "cost": [
+     "Water",
+     "Water",
+     "Lightning"
+    ],
+    "convertedEnergyCost": 3,
+    "damage": "250",
+    "text": "This attack also does 20 damage to each of your Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 3,
+  "number": "191",
+  "artist": "Saki Hayashiro",
+  "rarity": "Rare Ultra",
+  "nationalPokedexNumbers": [
+   149
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/191.png",
+   "large": "https://images.pokemontcg.io/swsh7/191_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-192",
+  "name": "Dragonite V",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Basic",
+   "V"
+  ],
+  "hp": "230",
+  "types": [
+   "Dragon"
+  ],
+  "rules": [
+   "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+  ],
+  "attacks": [
+   {
+    "name": "Shred",
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "convertedEnergyCost": 2,
+    "damage": "50",
+    "text": "This attack's damage isn't affected by any effects on your opponent's Active Pokémon."
+   },
+   {
+    "name": "Dragon Gale",
+    "cost": [
+     "Water",
+     "Water",
+     "Lightning"
+    ],
+    "convertedEnergyCost": 3,
+    "damage": "250",
+    "text": "This attack also does 20 damage to each of your Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 3,
+  "number": "192",
+  "artist": "Atsushi Furusawa",
+  "rarity": "Rare Ultra",
+  "nationalPokedexNumbers": [
+   149
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/192.png",
+   "large": "https://images.pokemontcg.io/swsh7/192_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-193",
+  "name": "Rayquaza V",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Basic",
+   "V",
+   "Rapid Strike"
+  ],
+  "hp": "210",
+  "types": [
+   "Dragon"
+  ],
+  "rules": [
+   "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+  ],
+  "attacks": [
+   {
+    "name": "Dragon Pulse",
+    "cost": [
+     "Lightning"
+    ],
+    "convertedEnergyCost": 1,
+    "damage": "40",
+    "text": "Discard the top 2 cards of your deck."
+   },
+   {
+    "name": "Spiral Burst",
+    "cost": [
+     "Fire",
+     "Lightning"
+    ],
+    "convertedEnergyCost": 2,
+    "damage": "20+",
+    "text": "You may discard up to 2 basic Fire Energy or up to 2 basic Lightning Energy from this Pokémon. This attack does 80 more damage for each card you discarded in this way."
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "193",
+  "artist": "PLANETA Mochizuki",
+  "rarity": "Rare Ultra",
+  "nationalPokedexNumbers": [
+   384
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/193.png",
+   "large": "https://images.pokemontcg.io/swsh7/193_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-194",
+  "name": "Rayquaza V",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Basic",
+   "V",
+   "Rapid Strike"
+  ],
+  "hp": "210",
+  "types": [
+   "Dragon"
+  ],
+  "rules": [
+   "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+  ],
+  "attacks": [
+   {
+    "name": "Dragon Pulse",
+    "cost": [
+     "Lightning"
+    ],
+    "convertedEnergyCost": 1,
+    "damage": "40",
+    "text": "Discard the top 2 cards of your deck."
+   },
+   {
+    "name": "Spiral Burst",
+    "cost": [
+     "Fire",
+     "Lightning"
+    ],
+    "convertedEnergyCost": 2,
+    "damage": "20+",
+    "text": "You may discard up to 2 basic Fire Energy or up to 2 basic Lightning Energy from this Pokémon. This attack does 80 more damage for each card you discarded in this way."
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "194",
+  "artist": "Ryuta Fuse",
+  "rarity": "Rare Ultra",
+  "nationalPokedexNumbers": [
+   384
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/194.png",
+   "large": "https://images.pokemontcg.io/swsh7/194_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-200",
+  "name": "Copycat",
+  "supertype": "Trainer",
+  "subtypes": [
+   "Supporter"
+  ],
+  "rules": [
+   "Shuffle your hand into your deck. Then, draw a card for each card in your opponent's hand.",
+   "You may play only 1 Supporter card during your turn."
+  ],
+  "number": "200",
+  "artist": "Sanosuke Sakuma",
+  "rarity": "Rare Ultra",
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/200.png",
+   "large": "https://images.pokemontcg.io/swsh7/200_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-214",
+  "name": "Umbreon VMAX",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "VMAX",
+   "Single Strike"
+  ],
+  "hp": "310",
+  "types": [
+   "Darkness"
+  ],
+  "evolvesFrom": "Umbreon V",
+  "rules": [
+   "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+  ],
+  "abilities": [
+   {
+    "name": "Dark Signal",
+    "text": "When you play this Pokémon from your hand to evolve 1 of your Pokémon during your turn, you may switch 1 of your opponent's Benched Pokémon with their Active Pokémon.",
+    "type": "Ability"
+   }
+  ],
+  "attacks": [
+   {
+    "name": "Max Darkness",
+    "cost": [
+     "Darkness",
+     "Colorless",
+     "Colorless"
+    ],
+    "convertedEnergyCost": 3,
+    "damage": "160",
+    "text": ""
+   }
+  ],
+  "weaknesses": [
+   {
+    "type": "Grass",
+    "value": "×2"
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "214",
+  "artist": "AKIRA EGAWA",
+  "rarity": "Rare Rainbow",
+  "nationalPokedexNumbers": [
+   197
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/214.png",
+   "large": "https://images.pokemontcg.io/swsh7/214_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-215",
+  "name": "Umbreon VMAX",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "VMAX",
+   "Single Strike"
+  ],
+  "hp": "310",
+  "types": [
+   "Darkness"
+  ],
+  "evolvesFrom": "Umbreon V",
+  "rules": [
+   "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+  ],
+  "abilities": [
+   {
+    "name": "Dark Signal",
+    "text": "When you play this Pokémon from your hand to evolve 1 of your Pokémon during your turn, you may switch 1 of your opponent's Benched Pokémon with their Active Pokémon.",
+    "type": "Ability"
+   }
+  ],
+  "attacks": [
+   {
+    "name": "Max Darkness",
+    "cost": [
+     "Darkness",
+     "Colorless",
+     "Colorless"
+    ],
+    "convertedEnergyCost": 3,
+    "damage": "160",
+    "text": ""
+   }
+  ],
+  "weaknesses": [
+   {
+    "type": "Grass",
+    "value": "×2"
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "215",
+  "artist": "KEIICHIRO ITO",
+  "rarity": "Rare Rainbow",
+  "nationalPokedexNumbers": [
+   197
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/215.png",
+   "large": "https://images.pokemontcg.io/swsh7/215_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-217",
+  "name": "Rayquaza VMAX",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "VMAX",
+   "Rapid Strike"
+  ],
+  "hp": "320",
+  "types": [
+   "Dragon"
+  ],
+  "evolvesFrom": "Rayquaza V",
+  "rules": [
+   "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+  ],
+  "abilities": [
+   {
+    "name": "Azure Pulse",
+    "text": "Once during your turn, you may discard your hand and draw 3 cards.",
+    "type": "Ability"
+   }
+  ],
+  "attacks": [
+   {
+    "name": "Max Burst",
+    "cost": [
+     "Fire",
+     "Lightning"
+    ],
+    "convertedEnergyCost": 2,
+    "damage": "20+",
+    "text": "You may discard any amount of basic Fire Energy or any amount of basic Lightning Energy from this Pokémon. This attack does 80 more damage for each card you discarded in this way."
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "217",
+  "artist": "PLANETA Mochizuki",
+  "rarity": "Rare Rainbow",
+  "nationalPokedexNumbers": [
+   384
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/217.png",
+   "large": "https://images.pokemontcg.io/swsh7/217_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-218",
+  "name": "Rayquaza VMAX",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "VMAX",
+   "Rapid Strike"
+  ],
+  "hp": "320",
+  "types": [
+   "Dragon"
+  ],
+  "evolvesFrom": "Rayquaza V",
+  "rules": [
+   "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+  ],
+  "abilities": [
+   {
+    "name": "Azure Pulse",
+    "text": "Once during your turn, you may discard your hand and draw 3 cards.",
+    "type": "Ability"
+   }
+  ],
+  "attacks": [
+   {
+    "name": "Max Burst",
+    "cost": [
+     "Fire",
+     "Lightning"
+    ],
+    "convertedEnergyCost": 2,
+    "damage": "20+",
+    "text": "You may discard any amount of basic Fire Energy or any amount of basic Lightning Energy from this Pokémon. This attack does 80 more damage for each card you discarded in this way."
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "218",
+  "artist": "Anesaki Dynamic",
+  "rarity": "Rare Rainbow",
+  "nationalPokedexNumbers": [
+   384
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/218.png",
+   "large": "https://images.pokemontcg.io/swsh7/218_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-219",
+  "name": "Duraludon VMAX",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "VMAX",
+   "Single Strike"
+  ],
+  "hp": "330",
+  "types": [
+   "Dragon"
+  ],
+  "evolvesFrom": "Duraludon V",
+  "rules": [
+   "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+  ],
+  "abilities": [
+   {
+    "name": "Skyscraper",
+    "text": "Prevent all damage done to this Pokémon by attacks from your opponent's Pokémon that have Special Energy attached.",
+    "type": "Ability"
+   }
+  ],
+  "attacks": [
+   {
+    "name": "G-Max Pulverization",
+    "cost": [
+     "Fighting",
+     "Metal",
+     "Metal"
+    ],
+    "convertedEnergyCost": 3,
+    "damage": "220",
+    "text": "This attack's damage isn't affected by any effects on your opponent's Active Pokémon."
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 3,
+  "number": "219",
+  "artist": "PLANETA Mochizuki",
+  "rarity": "Rare Rainbow",
+  "nationalPokedexNumbers": [
+   884
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/219.png",
+   "large": "https://images.pokemontcg.io/swsh7/219_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-220",
+  "name": "Duraludon VMAX",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "VMAX",
+   "Single Strike"
+  ],
+  "hp": "330",
+  "types": [
+   "Dragon"
+  ],
+  "evolvesFrom": "Duraludon V",
+  "rules": [
+   "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+  ],
+  "abilities": [
+   {
+    "name": "Skyscraper",
+    "text": "Prevent all damage done to this Pokémon by attacks from your opponent's Pokémon that have Special Energy attached.",
+    "type": "Ability"
+   }
+  ],
+  "attacks": [
+   {
+    "name": "G-Max Pulverization",
+    "cost": [
+     "Fighting",
+     "Metal",
+     "Metal"
+    ],
+    "convertedEnergyCost": 3,
+    "damage": "220",
+    "text": "This attack's damage isn't affected by any effects on your opponent's Active Pokémon."
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 3,
+  "number": "220",
+  "artist": "Saki Hayashiro",
+  "rarity": "Rare Rainbow",
+  "nationalPokedexNumbers": [
+   884
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/220.png",
+   "large": "https://images.pokemontcg.io/swsh7/220_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-222",
+  "name": "Copycat",
+  "supertype": "Trainer",
+  "subtypes": [
+   "Supporter"
+  ],
+  "rules": [
+   "Shuffle your hand into your deck. Then, draw a card for each card in your opponent's hand.",
+   "You may play only 1 Supporter card during your turn."
+  ],
+  "number": "222",
+  "artist": "Sanosuke Sakuma",
+  "rarity": "Rare Rainbow",
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/222.png",
+   "large": "https://images.pokemontcg.io/swsh7/222_hires.png"
+  }
+ },
+ {
+  "id": "swsh7-229",
+  "name": "Boost Shake",
+  "supertype": "Trainer",
+  "subtypes": [
+   "Item"
+  ],
+  "rules": [
+   "Search your deck for a card that evolves from 1 of your Pokémon and put it onto that Pokémon to evolve it. Then, shuffle your deck. You can use this card during your first turn or on a Pokémon that was put into play this turn. Your turn ends.",
+   "You may play any number of Item cards during your turn."
+  ],
+  "number": "229",
+  "artist": "sadaji",
+  "rarity": "Rare Secret",
+  "legalities": {
+   "unlimited": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "E",
+  "images": {
+   "small": "https://images.pokemontcg.io/swsh7/229.png",
+   "large": "https://images.pokemontcg.io/swsh7/229_hires.png"
+  }
+ }
+]

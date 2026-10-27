@@ -1,0 +1,571 @@
+[
+ {
+  "id": "sv3pt5-1",
+  "name": "Bulbasaur",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Basic"
+  ],
+  "hp": "70",
+  "types": [
+   "Grass"
+  ],
+  "evolvesTo": [
+   "Ivysaur"
+  ],
+  "attacks": [
+   {
+    "name": "Leech Seed",
+    "cost": [
+     "Grass",
+     "Colorless"
+    ],
+    "convertedEnergyCost": 2,
+    "damage": "20",
+    "text": "Heal 20 damage from this Pokémon."
+   }
+  ],
+  "weaknesses": [
+   {
+    "type": "Fire",
+    "value": "×2"
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "1",
+  "artist": "Yuu Nishida",
+  "rarity": "Common",
+  "flavorText": "While it is young, it uses the nutrients that are stored in the seed on its back in order to grow.",
+  "nationalPokedexNumbers": [
+   1
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "standard": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "G",
+  "images": {
+   "small": "https://images.pokemontcg.io/sv3pt5/1.png",
+   "large": "https://images.pokemontcg.io/sv3pt5/1_hires.png"
+  }
+ },
+ {
+  "id": "sv3pt5-6",
+  "name": "Charizard ex",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Stage 2",
+   "ex"
+  ],
+  "hp": "330",
+  "types": [
+   "Fire"
+  ],
+  "evolvesFrom": "Charmeleon",
+  "rules": [
+   "Pokémon ex rule: When your Pokémon ex is Knocked Out, your opponent takes 2 Prize cards."
+  ],
+  "attacks": [
+   {
+    "name": "Brave Wing",
+    "cost": [
+     "Fire"
+    ],
+    "convertedEnergyCost": 1,
+    "damage": "60+",
+    "text": "If this Pokémon has any damage counters on it, this attack does 100 more damage."
+   },
+   {
+    "name": "Explosive Vortex",
+    "cost": [
+     "Fire",
+     "Fire",
+     "Fire",
+     "Fire"
+    ],
+    "convertedEnergyCost": 4,
+    "damage": "330",
+    "text": "Discard 3 Energy from this Pokémon."
+   }
+  ],
+  "weaknesses": [
+   {
+    "type": "Water",
+    "value": "×2"
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "6",
+  "artist": "PLANETA Mochizuki",
+  "rarity": "Double Rare",
+  "nationalPokedexNumbers": [
+   6
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "standard": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "G",
+  "images": {
+   "small": "https://images.pokemontcg.io/sv3pt5/6.png",
+   "large": "https://images.pokemontcg.io/sv3pt5/6_hires.png"
+  }
+ },
+ {
+  "id": "sv3pt5-25",
+  "name": "Pikachu",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Basic"
+  ],
+  "hp": "60",
+  "types": [
+   "Lightning"
+  ],
+  "evolvesTo": [
+   "Raichu"
+  ],
+  "attacks": [
+   {
+    "name": "Charge",
+    "cost": [
+     "Lightning"
+    ],
+    "convertedEnergyCost": 1,
+    "damage": "",
+    "text": "Search your deck for a Basic Lightning Energy card and attach it to this Pokémon. Then, shuffle your deck."
+   },
+   {
+    "name": "Pika Punch",
+    "cost": [
+     "Lightning",
+     "Lightning",
+     "Colorless"
+    ],
+    "convertedEnergyCost": 3,
+    "damage": "50",
+    "text": ""
+   }
+  ],
+  "weaknesses": [
+   {
+    "type": "Fighting",
+    "value": "×2"
+   }
+  ],
+  "retreatCost": [
+   "Colorless"
+  ],
+  "convertedRetreatCost": 1,
+  "number": "25",
+  "artist": "Naoyo Kimura",
+  "rarity": "Common",
+  "flavorText": "When it is angered, it immediately discharges the energy stored in the pouches in its cheeks.",
+  "nationalPokedexNumbers": [
+   25
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "standard": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "G",
+  "images": {
+   "small": "https://images.pokemontcg.io/sv3pt5/25.png",
+   "large": "https://images.pokemontcg.io/sv3pt5/25_hires.png"
+  }
+ },
+ {
+  "id": "sv3pt5-149",
+  "name": "Dragonite",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Stage 2"
+  ],
+  "hp": "180",
+  "types": [
+   "Dragon"
+  ],
+  "evolvesFrom": "Dragonair",
+  "abilities": [
+   {
+    "name": "Jet Cruise",
+    "text": "Your Pokémon in play have no Retreat Cost.",
+    "type": "Ability"
+   }
+  ],
+  "attacks": [
+   {
+    "name": "Dragon Pulse",
+    "cost": [
+     "Water",
+     "Lightning"
+    ],
+    "convertedEnergyCost": 2,
+    "damage": "180",
+    "text": "Discard the top 2 cards of your deck."
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 3,
+  "number": "149",
+  "artist": "Sanosuke Sakuma",
+  "rarity": "Rare",
+  "flavorText": "It is said that somewhere in the ocean lies an island where these gather. Only they live there.",
+  "nationalPokedexNumbers": [
+   149
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "standard": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "G",
+  "images": {
+   "small": "https://images.pokemontcg.io/sv3pt5/149.png",
+   "large": "https://images.pokemontcg.io/sv3pt5/149_hires.png"
+  }
+ },
+ {
+  "id": "sv3pt5-160",
+  "name": "Erika's Invitation",
+  "supertype": "Trainer",
+  "subtypes": [
+   "Supporter"
+  ],
+  "rules": [
+   "Your opponent reveals their hand, and you put a Basic Pokémon you find there onto your opponent's Bench. If you put a Pokémon onto their Bench in this way, switch in that Pokémon to the Active Spot.",
+   "You may play only 1 Supporter card during your turn."
+  ],
+  "number": "160",
+  "artist": "saino misaki",
+  "rarity": "Uncommon",
+  "legalities": {
+   "unlimited": "Legal",
+   "standard": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "G",
+  "images": {
+   "small": "https://images.pokemontcg.io/sv3pt5/160.png",
+   "large": "https://images.pokemontcg.io/sv3pt5/160_hires.png"
+  }
+ },
+ {
+  "id": "sv3pt5-166",
+  "name": "Bulbasaur",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Basic"
+  ],
+  "hp": "70",
+  "types": [
+   "Grass"
+  ],
+  "evolvesTo": [
+   "Ivysaur"
+  ],
+  "attacks": [
+   {
+    "name": "Leech Seed",
+    "cost": [
+     "Grass",
+     "Colorless"
+    ],
+    "convertedEnergyCost": 2,
+    "damage": "20",
+    "text": "Heal 20 damage from this Pokémon."
+   }
+  ],
+  "weaknesses": [
+   {
+    "type": "Fire",
+    "value": "×2"
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "166",
+  "artist": "Yoriyuki Ikegami",
+  "rarity": "Illustration Rare",
+  "flavorText": "While it is young, it uses the nutrients that are stored in the seed on its back in order to grow.",
+  "nationalPokedexNumbers": [
+   1
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "standard": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "G",
+  "images": {
+   "small": "https://images.pokemontcg.io/sv3pt5/166.png",
+   "large": "https://images.pokemontcg.io/sv3pt5/166_hires.png"
+  }
+ },
+ {
+  "id": "sv3pt5-173",
+  "name": "Pikachu",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Basic"
+  ],
+  "hp": "60",
+  "types": [
+   "Lightning"
+  ],
+  "evolvesTo": [
+   "Raichu"
+  ],
+  "attacks": [
+   {
+    "name": "Charge",
+    "cost": [
+     "Lightning"
+    ],
+    "convertedEnergyCost": 1,
+    "damage": "",
+    "text": "Search your deck for a Basic Lightning Energy card and attach it to this Pokémon. Then, shuffle your deck."
+   },
+   {
+    "name": "Pika Punch",
+    "cost": [
+     "Lightning",
+     "Lightning",
+     "Colorless"
+    ],
+    "convertedEnergyCost": 3,
+    "damage": "50",
+    "text": ""
+   }
+  ],
+  "weaknesses": [
+   {
+    "type": "Fighting",
+    "value": "×2"
+   }
+  ],
+  "retreatCost": [
+   "Colorless"
+  ],
+  "convertedRetreatCost": 1,
+  "number": "173",
+  "artist": "Hiroyuki Yamamoto",
+  "rarity": "Illustration Rare",
+  "flavorText": "When it is angered, it immediately discharges the energy stored in the pouches in its cheeks.",
+  "nationalPokedexNumbers": [
+   25
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "standard": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "G",
+  "images": {
+   "small": "https://images.pokemontcg.io/sv3pt5/173.png",
+   "large": "https://images.pokemontcg.io/sv3pt5/173_hires.png"
+  }
+ },
+ {
+  "id": "sv3pt5-183",
+  "name": "Charizard ex",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Stage 2",
+   "ex"
+  ],
+  "hp": "330",
+  "types": [
+   "Fire"
+  ],
+  "evolvesFrom": "Charmeleon",
+  "rules": [
+   "Pokémon ex rule: When your Pokémon ex is Knocked Out, your opponent takes 2 Prize cards."
+  ],
+  "attacks": [
+   {
+    "name": "Brave Wing",
+    "cost": [
+     "Fire"
+    ],
+    "convertedEnergyCost": 1,
+    "damage": "60+",
+    "text": "If this Pokémon has any damage counters on it, this attack does 100 more damage."
+   },
+   {
+    "name": "Explosive Vortex",
+    "cost": [
+     "Fire",
+     "Fire",
+     "Fire",
+     "Fire"
+    ],
+    "convertedEnergyCost": 4,
+    "damage": "330",
+    "text": "Discard 3 Energy from this Pokémon."
+   }
+  ],
+  "weaknesses": [
+   {
+    "type": "Water",
+    "value": "×2"
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "183",
+  "artist": "PLANETA Mochizuki",
+  "rarity": "Ultra Rare",
+  "nationalPokedexNumbers": [
+   6
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "standard": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "G",
+  "images": {
+   "small": "https://images.pokemontcg.io/sv3pt5/183.png",
+   "large": "https://images.pokemontcg.io/sv3pt5/183_hires.png"
+  }
+ },
+ {
+  "id": "sv3pt5-196",
+  "name": "Erika's Invitation",
+  "supertype": "Trainer",
+  "subtypes": [
+   "Supporter"
+  ],
+  "rules": [
+   "Your opponent reveals their hand, and you put a Basic Pokémon you find there onto your opponent's Bench. If you put a Pokémon onto their Bench in this way, switch in that Pokémon to the Active Spot.",
+   "You may play only 1 Supporter card during your turn."
+  ],
+  "number": "196",
+  "artist": "saino misaki",
+  "rarity": "Ultra Rare",
+  "legalities": {
+   "unlimited": "Legal",
+   "standard": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "G",
+  "images": {
+   "small": "https://images.pokemontcg.io/sv3pt5/196.png",
+   "large": "https://images.pokemontcg.io/sv3pt5/196_hires.png"
+  }
+ },
+ {
+  "id": "sv3pt5-199",
+  "name": "Charizard ex",
+  "supertype": "Pokémon",
+  "subtypes": [
+   "Stage 2",
+   "ex"
+  ],
+  "hp": "330",
+  "types": [
+   "Fire"
+  ],
+  "evolvesFrom": "Charmeleon",
+  "rules": [
+   "Pokémon ex rule: When your Pokémon ex is Knocked Out, your opponent takes 2 Prize cards."
+  ],
+  "attacks": [
+   {
+    "name": "Brave Wing",
+    "cost": [
+     "Fire"
+    ],
+    "convertedEnergyCost": 1,
+    "damage": "60+",
+    "text": "If this Pokémon has any damage counters on it, this attack does 100 more damage."
+   },
+   {
+    "name": "Explosive Vortex",
+    "cost": [
+     "Fire",
+     "Fire",
+     "Fire",
+     "Fire"
+    ],
+    "convertedEnergyCost": 4,
+    "damage": "330",
+    "text": "Discard 3 Energy from this Pokémon."
+   }
+  ],
+  "weaknesses": [
+   {
+    "type": "Water",
+    "value": "×2"
+   }
+  ],
+  "retreatCost": [
+   "Colorless",
+   "Colorless"
+  ],
+  "convertedRetreatCost": 2,
+  "number": "199",
+  "artist": "miki kudo",
+  "rarity": "Special Illustration Rare",
+  "nationalPokedexNumbers": [
+   6
+  ],
+  "legalities": {
+   "unlimited": "Legal",
+   "standard": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "G",
+  "images": {
+   "small": "https://images.pokemontcg.io/sv3pt5/199.png",
+   "large": "https://images.pokemontcg.io/sv3pt5/199_hires.png"
+  }
+ },
+ {
+  "id": "sv3pt5-203",
+  "name": "Erika's Invitation",
+  "supertype": "Trainer",
+  "subtypes": [
+   "Supporter"
+  ],
+  "rules": [
+   "Your opponent reveals their hand, and you put a Basic Pokémon you find there onto your opponent's Bench. If you put a Pokémon onto their Bench in this way, switch in that Pokémon to the Active Spot.",
+   "You may play only 1 Supporter card during your turn."
+  ],
+  "number": "203",
+  "artist": "Cona Nitanda",
+  "rarity": "Special Illustration Rare",
+  "legalities": {
+   "unlimited": "Legal",
+   "standard": "Legal",
+   "expanded": "Legal"
+  },
+  "regulationMark": "G",
+  "images": {
+   "small": "https://images.pokemontcg.io/sv3pt5/203.png",
+   "large": "https://images.pokemontcg.io/sv3pt5/203_hires.png"
+  }
+ }
+]

@@ -1,109 +1,161 @@
-# Pokémon TCG RAG — Evolving Skies
+# Pokémon TCG RAG — catálogo completo + asistente con IA
 
-Agente con recuperación aumentada (RAG) que responde consultas sobre las cartas del
-set **Evolving Skies** de Pokémon TCG, combinando una base de datos vectorial local
-(catálogo de cartas) con una herramienta de consulta de precios en tiempo real.
+Sitio web y agente con recuperación aumentada (RAG) sobre **todas las cartas de
+Pokémon TCG**: 176 sets y más de 20.600 cartas, desde Base Set (1999) hasta la
+serie Mega Evolution (2026), con imágenes, ataques, habilidades, legalidad y
+precios de mercado en vivo.
 
-Proyecto desarrollado para la Evaluación Parcial N°1 — ISY0101 Ingeniería de
-Soluciones con IA (Duoc UC).
+Proyecto desarrollado inicialmente para la Evaluación Parcial N°1 — ISY0101
+Ingeniería de Soluciones con IA (Duoc UC), y extendido para desplegarse en un
+dominio propio.
+
+## Qué incluye
+
+- **Explorador de cartas**: búsqueda por nombre, ataque, habilidad o artista;
+  filtros por set, tipo, categoría, rareza y formato estándar; ficha de cada carta
+  con imagen en alta resolución, otras impresiones y precios (TCGPlayer / Cardmarket).
+- **Navegación por sets**, agrupados por serie.
+- **Asistente** en español: entiende consultas como *"carta de tipo Dragón con
+  más de 200 HP y habilidad de curación"* o *"¿cuánto vale Umbreon VMAX?"*, y
+  responde citando cartas reales (con sus imágenes).
+- **API REST** documentada en `/api/docs`.
+- Listo para producción: Docker, HTTPS automático con Caddy, límite de consultas
+  por IP, pruebas automatizadas y CI.
 
 ## Arquitectura
 
 ![Arquitectura de la solución](docs/architecture.png)
 
-1. El usuario hace una consulta en lenguaje natural.
-2. El **agente orquestador** (`src/agent.py`) decide si debe buscar cartas en la
-   base vectorial, consultar precios externos, o ambos.
-3. La **base vectorial** (`src/vector_store.py`, Chroma) recupera las cartas más
-   relevantes por similitud semántica.
-4. La **herramienta de precios** (`src/tools/price_api.py`) consulta valores de
-   mercado en vivo cuando corresponde.
-5. El **LLM** combina el contexto recuperado con la pregunta original y genera la
-   respuesta final, citando las cartas usadas.
+1. El usuario consulta desde la web (`web/`) o la consola (`src/main.py`).
+2. `src/query_parser.py` detecta nombres de cartas y filtros (tipo, HP, set,
+   categoría, estándar) en español o inglés, y si se pide un precio.
+3. El **agente** (`src/agent.py`) elige la ruta:
+   - **Precio** → `src/tools/price_api.py` consulta la API de pokemontcg.io en vivo
+     (con caché) para cada impresión de la carta.
+   - **RAG** → `src/rag_pipeline.py` hace una recuperación **híbrida**:
+     cartas nombradas (SQLite), búsqueda semántica con filtros (Chroma) y
+     respaldo de texto completo (FTS5).
+4. El **LLM** (`src/llm_client.py`: Groq, Claude u OpenAI-compatible) redacta la
+   respuesta usando solo las cartas recuperadas. Sin API key, el sistema sigue
+   funcionando y muestra las cartas encontradas.
 
-Detalle completo de las decisiones de diseño en el informe técnico entregado junto
-a este repositorio.
+| Componente | Archivo | Tecnología |
+|---|---|---|
+| Fuente de datos | `src/data_sources.py` | [PokemonTCG/pokemon-tcg-data](https://github.com/PokemonTCG/pokemon-tcg-data) |
+| Catálogo y filtros | `src/catalog.py` | SQLite + FTS5 |
+| Embeddings | `src/embeddings.py` | fastembed (ONNX, CPU) — modelo multilingüe |
+| Base vectorial | `src/vector_store.py` | Chroma |
+| API + web | `src/api.py`, `web/` | FastAPI, HTML/CSS/JS sin dependencias |
 
-## Estructura del proyecto
+## Desplegar en tu dominio (VPS + Docker)
 
-```
-pokemon-tcg-rag/
-├── README.md
-├── requirements.txt
-├── .env.example
-├── data/                     # catálogo de cartas descargado (se genera al correr ingest.py)
-├── docs/
-│   └── architecture.png
-├── src/
-│   ├── config.py             # carga de variables de entorno
-│   ├── ingest.py             # descarga cartas y construye la base vectorial
-│   ├── vector_store.py       # wrapper de Chroma (indexar / buscar)
-│   ├── rag_pipeline.py       # orquesta recuperación + generación
-│   ├── agent.py              # decide qué herramienta usar y llama al LLM
-│   ├── llm_client.py         # cliente del LLM (Claude / OpenAI, intercambiable)
-│   ├── main.py               # punto de entrada por consola (CLI)
-│   └── tools/
-│       └── price_api.py      # consulta de precios en tiempo real
-└── tests/
-    └── test_retrieval.py     # prueba básica de la recuperación semántica
-```
+Requisitos: un servidor Linux con Docker (2 GB de RAM recomendados, ~3 GB de disco)
+y un dominio.
 
-## Requisitos
+1. En tu proveedor de DNS crea un registro **A** de tu dominio (por ejemplo
+   `tcg.midominio.cl`) apuntando a la IP del servidor. Abre los puertos 80 y 443.
+2. En el servidor:
 
-- Python 3.10+
-- Una API key de un proveedor de LLM (Anthropic o OpenAI) para la etapa de
-  generación. La recuperación (embeddings + Chroma) funciona sin API key.
+   ```bash
+   git clone https://github.com/Daartw/TCG-rag.git
+   cd TCG-rag
+   cp .env.example .env
+   nano .env        # DOMAIN, ACME_EMAIL y GROQ_API_KEY
+   docker compose up -d --build
+   ```
 
-## Instalación
+   La primera construcción descarga el catálogo y genera los embeddings de las
+   ~20.600 cartas (10–20 min según el servidor). Después la imagen arranca en
+   segundos. Caddy obtiene el certificado HTTPS automáticamente.
+3. Abre `https://tu-dominio`. Estado del servicio: `https://tu-dominio/api/health`.
+
+**Actualizar el catálogo** cuando salga un set nuevo:
 
 ```bash
-git clone <url-del-repositorio>
-cd pokemon-tcg-rag
-python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env             # y completar la API key del LLM
+git pull
+docker compose build --build-arg CACHE_BUST=$(date +%F) app && docker compose up -d
 ```
 
-## Ejecución
+### Otras plataformas
 
-1. **Descargar el catálogo del set y construir la base vectorial** (solo la primera
-   vez, o cuando se quiera actualizar el catálogo):
+- **Render**: `New > Blueprint` con este repo (usa `render.yaml`), agrega
+  `GROQ_API_KEY` y luego tu dominio en *Custom Domains*.
+- **Railway / Fly.io / Coolify / Dokploy**: despliega el `Dockerfile`; la app
+  escucha en `$PORT`. Configura el dominio en el panel de la plataforma (no hace
+  falta Caddy).
+- Para una imagen más liviana que indexe al primer arranque:
+  `--build-arg BUILD_INDEX=false` (en ese caso monta un volumen en `/app/data`).
 
-   ```bash
-   python -m src.ingest
-   ```
+### Imágenes en tu propio servidor (opcional)
 
-   Esto consulta la API pública de Pokémon TCG (https://pokemontcg.io) filtrando por
-   el set Evolving Skies (`swsh7`), genera los embeddings de cada carta y los guarda
-   en `data/chroma_db/`.
+Por defecto las imágenes se cargan desde el CDN de `images.pokemontcg.io`. Para
+servirlas tú mismo:
 
-2. **Iniciar el asistente por consola:**
+```bash
+docker compose exec app python scripts/mirror_images.py           # miniaturas (~1 GB)
+docker compose exec app python scripts/mirror_images.py --large   # + alta resolución (~12-15 GB)
+# luego en .env: IMAGE_BASE_URL=/images  y  docker compose up -d
+```
 
-   ```bash
-   python -m src.main
-   ```
+## Desarrollo local
 
-   Ejemplos de consultas a probar:
-   - "Busco una carta de tipo Dragón con HP mayor a 200 que tenga una habilidad de curación"
-   - "Recomiéndame 3 cartas que complementen a Rayquaza VMAX"
-   - "¿Cuál es el precio actual de Umbreon VMAX Alt Art?"
+```bash
+python -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -r requirements-dev.txt
+cp .env.example .env               # completa GROQ_API_KEY (opcional)
 
-3. **Ejecutar las pruebas:**
+python -m src.ingest               # todo el catálogo (o --sets swsh7,sv1 para probar rápido)
+uvicorn src.api:app --reload       # http://localhost:8000
+python -m src.main                 # asistente por consola
+pytest                             # pruebas (sin internet ni API keys)
+```
 
-   ```bash
-   pytest tests/
-   ```
+Opciones de `src.ingest`: `--sets`, `--refresh` (vuelve a descargar los datos),
+`--skip-vectors` (solo SQLite) y `--force-vectors`.
+
+## Variables de entorno principales
+
+| Variable | Descripción |
+|---|---|
+| `DOMAIN`, `ACME_EMAIL` | Dominio y correo para el HTTPS (docker-compose) |
+| `LLM_PROVIDER` | `auto`, `groq`, `anthropic`, `openai` o `none` |
+| `GROQ_API_KEY` / `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` | Clave del proveedor de LLM |
+| `CHAT_RATE_LIMIT_PER_MIN` | Mensajes al asistente por IP y minuto |
+| `POKEMON_TCG_API_KEY` | Opcional, sube el límite de la API de precios |
+| `IMAGE_BASE_URL` | CDN de imágenes o `/images` si las espejas |
+| `INGEST_SET_IDS` | Limita la ingesta a ciertos sets |
+
+Ver `.env.example` para la lista completa.
+
+## API
+
+| Método | Ruta | Descripción |
+|---|---|---|
+| GET | `/api/cards` | Búsqueda paginada (`q`, `set`, `type`, `supertype`, `rarity`, `min_hp`, `max_hp`, `standard`, `sort`, `page`) |
+| GET | `/api/cards/{id}` | Ficha completa + otras impresiones |
+| GET | `/api/cards/{id}/price` | Precios en vivo (TCGPlayer / Cardmarket) |
+| GET | `/api/sets` | Todos los sets |
+| GET | `/api/meta` | Totales y opciones de filtros |
+| POST | `/api/chat` | `{"message": "...", "history": []}` → respuesta + cartas |
+| GET | `/api/health` | Estado del servicio |
 
 ## Uso de inteligencia artificial en el desarrollo
 
 Declarar en esta sección, según lo exigido por la pauta de la evaluación, qué
-herramientas de IA se usaron durante el desarrollo del código (por ejemplo, apoyo
-en la redacción de este README o en la estructura inicial del proyecto) y qué partes
-fueron diseñadas, implementadas y validadas directamente por el equipo.
+herramientas de IA se usaron durante el desarrollo. La versión desplegable
+(catálogo completo, API web, frontend y configuración de despliegue) se
+desarrolló con apoyo de Claude (Anthropic); indicar aquí qué partes fueron
+diseñadas, revisadas y validadas directamente por el equipo.
 
 ## Evidencia de pruebas
 
-Agregar aquí (o en una carpeta `docs/evidencia/`) capturas de pantalla de consultas
-reales ejecutadas contra el sistema, junto con una breve nota de si la respuesta fue
-correcta y coherente con los datos recuperados.
+Agregar aquí (o en `docs/evidencia/`) capturas de consultas reales ejecutadas
+contra el sistema, con una nota sobre si la respuesta fue correcta y coherente
+con los datos recuperados.
+
+## Créditos y aviso legal
+
+Proyecto no oficial, sin afiliación con Nintendo, Creatures, GAME FREAK ni The
+Pokémon Company. Pokémon y los nombres de personajes son marcas de sus
+respectivos dueños. Datos e imágenes de cartas: [pokemontcg.io](https://pokemontcg.io).
