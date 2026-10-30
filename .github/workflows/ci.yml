@@ -1,13 +1,25 @@
 name: CI
 on: [push, pull_request]
+
+# cancela ejecuciones anteriores de la misma rama al subir un cambio nuevo
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: pip
-      - run: pip install -r requirements-dev.txt
+      - run: pip install -r requirements-dev.txt ruff
+      # errores de sintaxis y nombres no definidos (los que rompen en ejecución)
+      - run: ruff check --select E9,F63,F7,F82 .
       - run: pytest -q
