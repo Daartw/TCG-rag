@@ -83,8 +83,12 @@ _hits_lock = Lock()
 
 
 def client_ip(request: Request) -> str:
-    forwarded = request.headers.get("x-forwarded-for")
-    return forwarded.split(",")[0].strip() if forwarded else (request.client.host if request.client else "?")
+    """IP del cliente. Detrás de Caddy se usa el ÚLTIMO valor de X-Forwarded-For, que lo agrega
+    el propio proxy: el primero lo puede inventar el cliente para saltarse el límite de consultas."""
+    forwarded = [ip.strip() for ip in request.headers.get("x-forwarded-for", "").split(",") if ip.strip()]
+    if forwarded:
+        return forwarded[-1]
+    return request.client.host if request.client else "?"
 
 
 def check_rate_limit(request: Request):
