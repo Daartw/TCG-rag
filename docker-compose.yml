@@ -15,12 +15,21 @@ services:
     volumes:
       # Solo se usa si espejas las imágenes localmente (scripts/mirror_images.py)
       - card-images:/app/data/images
+    logging: &logs
+      # evita que los registros llenen el disco del servidor
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   caddy:
     image: caddy:2-alpine
     restart: unless-stopped
     depends_on:
-      - app
+      app:
+        # Caddy espera a que la app pase su chequeo de salud (definido en el Dockerfile)
+        condition: service_healthy
+    logging: *logs
     ports:
       - "80:80"
       - "443:443"
