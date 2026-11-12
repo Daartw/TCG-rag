@@ -1,5 +1,8 @@
 # Pokémon TCG RAG — catálogo completo + asistente con IA
 
+[![CI](https://github.com/Daartw/TCG-rag/actions/workflows/ci.yml/badge.svg)](https://github.com/Daartw/TCG-rag/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/Daartw/TCG-rag/actions/workflows/codeql.yml/badge.svg)](https://github.com/Daartw/TCG-rag/actions/workflows/codeql.yml)
+
 Sitio web y agente con recuperación aumentada (RAG) sobre **todas las cartas de
 Pokémon TCG**: 176 sets y más de 20.600 cartas, desde Base Set (1999) hasta la
 serie Mega Evolution (2026), con imágenes, ataques, habilidades, legalidad y
@@ -122,6 +125,8 @@ Opciones de `src.ingest`: `--sets`, `--refresh` (vuelve a descargar los datos),
 | `LLM_PROVIDER` | `auto`, `groq`, `anthropic`, `openai` o `none` |
 | `GROQ_API_KEY` / `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` | Clave del proveedor de LLM |
 | `CHAT_RATE_LIMIT_PER_MIN` | Mensajes al asistente por IP y minuto |
+| `CHAT_GLOBAL_LIMIT_PER_MIN` | Tope total de mensajes por minuto, sumando todos los visitantes |
+| `FORWARDED_ALLOW_IPS` | Proxies de confianza para obtener la IP real del visitante (por defecto, redes privadas) |
 | `POKEMON_TCG_API_KEY` | Opcional, sube el límite de la API de precios |
 | `IMAGE_BASE_URL` | CDN de imágenes o `/images` si las espejas |
 | `INGEST_SET_IDS` | Limita la ingesta a ciertos sets |
@@ -162,6 +167,15 @@ de diseño y del contenido final entregado.
 Agregar aquí (o en `docs/evidencia/`) capturas de consultas reales ejecutadas
 contra el sistema, con una nota sobre si la respuesta fue correcta y coherente
 con los datos recuperados.
+
+## Seguridad
+
+- Content Security Policy y cabeceras de seguridad en todas las respuestas.
+- Límite de consultas al asistente por visitante y tope global, para proteger la cuota del LLM.
+- Entrada validada con Pydantic, consultas SQL parametrizadas y salida escapada en el frontend.
+- Contenedor sin root, HTTPS automático con Caddy, Dependabot, auditoría de dependencias y CodeQL en CI.
+
+Ver [SECURITY.md](SECURITY.md) para reportar una vulnerabilidad y las recomendaciones de despliegue.
 
 ## Créditos y aviso legal
 

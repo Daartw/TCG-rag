@@ -226,6 +226,8 @@
       </div></div>`;
   }
 
+  // Solo se enlazan URLs http(s): un dato externo con otro esquema (javascript:, data:) no llega al href.
+  const safeUrl = (u) => (/^https?:\/\//i.test(String(u ?? "")) ? String(u) : "");
   const money = (v, cur) => (v == null ? "—" : (cur === "USD" ? "US$" : "€") + Number(v).toFixed(2));
   async function loadPrice(id) {
     const el = $("#priceBlock");
@@ -237,7 +239,7 @@
         `<tr><td>TCGPlayer · ${esc(variant)}</td><td>${money(v.low, "USD")}</td><td>${money(v.market, "USD")}</td><td>${money(v.high, "USD")}</td></tr>`);
       const cm = p.cardmarket.prices_eur || {};
       if (Object.keys(cm).length) rows.push(`<tr><td>Cardmarket</td><td>${money(cm.lowPrice, "EUR")}</td><td>${money(cm.trendPrice ?? cm.averageSellPrice, "EUR")}</td><td>${money(cm.avg30, "EUR")} <span class="muted tiny">(30d)</span></td></tr>`);
-      const links = [p.tcgplayer.url && `<a href="${esc(p.tcgplayer.url)}" target="_blank" rel="noopener">TCGPlayer</a>`, p.cardmarket.url && `<a href="${esc(p.cardmarket.url)}" target="_blank" rel="noopener">Cardmarket</a>`].filter(Boolean).join(" · ");
+      const links = [safeUrl(p.tcgplayer.url) && `<a href="${esc(safeUrl(p.tcgplayer.url))}" target="_blank" rel="noopener noreferrer">TCGPlayer</a>`, safeUrl(p.cardmarket.url) && `<a href="${esc(safeUrl(p.cardmarket.url))}" target="_blank" rel="noopener noreferrer">Cardmarket</a>`].filter(Boolean).join(" · ");
       el.innerHTML = `<span class="label">Precio de mercado</span>${rows.length ? `<table><tr><th></th><th>Bajo</th><th>Mercado</th><th>Alto</th></tr>${rows.join("")}</table>` : "<p>Sin datos de precio.</p>"}<p class="tiny" style="margin-top:6px">${links} ${p.tcgplayer.updated_at ? "· actualizado " + esc(p.tcgplayer.updated_at) : ""}</p>`;
     } catch {
       el.innerHTML = '<span class="label">Precio de mercado</span><p>El servicio de precios no respondió.</p>';
@@ -245,6 +247,11 @@
   }
 
   /* ---------------- sets ---------------- */
+  // Si el logo de un set no carga, se quita (sin manejadores en línea, compatibles con la CSP del sitio).
+  document.addEventListener("error", (e) => {
+    if (e.target instanceof HTMLImageElement && e.target.closest(".set-tile .logo")) e.target.remove();
+  }, true);
+
   function renderSets() {
     const el = $("#setList");
     if (!state.sets) { el.innerHTML = '<div class="empty">Cargando…</div>'; return; }
@@ -252,7 +259,7 @@
     for (const s of state.sets) { if (!bySeries.has(s.series)) bySeries.set(s.series, []); bySeries.get(s.series).push(s); }
     el.innerHTML = [...bySeries].map(([series, sets]) => `<div class="series"><h2>${esc(series)}</h2><div class="set-grid">${sets.map((s) => `
       <a class="set-tile" href="/set/${encodeURIComponent(s.id)}" data-link>
-        <div class="logo">${s.images.logo ? `<img loading="lazy" src="${esc(s.images.logo)}" alt="" onerror="this.remove()">` : ""}</div>
+        <div class="logo">${s.images.logo ? `<img loading="lazy" src="${esc(s.images.logo)}" alt="">` : ""}</div>
         <strong>${esc(s.name)}</strong>
         <div class="row"><span>${esc(s.release_date)}</span><span>${s.card_count} cartas${s.legal_standard ? " · Estándar" : ""}</span></div>
       </a>`).join("")}</div></div>`).join("");
