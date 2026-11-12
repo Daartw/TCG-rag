@@ -16,6 +16,7 @@ os.environ.update({
     "LLM_PROVIDER": "none",
     "INGEST_SET_IDS": "",
     "CHAT_RATE_LIMIT_PER_MIN": "1000",
+    "CHAT_GLOBAL_LIMIT_PER_MIN": "1000",
     # la API de precios no se contacta en las pruebas
     "POKEMON_TCG_API_URL": "http://127.0.0.1:9/v2",
 })
