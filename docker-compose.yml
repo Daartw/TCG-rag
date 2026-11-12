@@ -10,6 +10,11 @@ services:
     image: tcg-rag:latest
     env_file: .env
     restart: unless-stopped
+    # El proceso no necesita privilegios del kernel ni puede escalar permisos
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
     expose:
       - "8000"
     volumes:

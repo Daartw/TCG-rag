@@ -23,3 +23,25 @@ jobs:
       # errores de sintaxis y nombres no definidos (los que rompen en ejecución)
       - run: ruff check --select E9,F63,F7,F82 .
       - run: pytest -q
+
+  audit:
+    name: Auditoría de dependencias
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install pip-audit
+      # Falla si alguna dependencia tiene vulnerabilidades conocidas.
+      # Excepciones (chromadb <= 1.5.9, sin versión corregida al 2026-11): los avisos afectan al
+      # servidor HTTP de Chroma y a su capa de autorización. Este proyecto usa Chroma embebido
+      # (PersistentClient) y nunca expone ese servidor. Quitar cada excepción cuando exista corrección.
+      - run: >
+          pip-audit -r requirements.txt
+          --ignore-vuln PYSEC-2026-311
+          --ignore-vuln PYSEC-2026-3813
+          --ignore-vuln PYSEC-2026-3814
+          --ignore-vuln PYSEC-2026-3815

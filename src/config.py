@@ -80,5 +80,7 @@ PORT = int(os.getenv("PORT", "8000"))
 CORS_ORIGINS = [o.strip() for o in os.getenv("CORS_ORIGINS", "*").split(",") if o.strip()]
 # Límite de consultas al chat por IP y por minuto (protege tu API key del LLM)
 CHAT_RATE_LIMIT_PER_MIN = int(os.getenv("CHAT_RATE_LIMIT_PER_MIN", "15"))
+# Tope total de consultas al chat por minuto, sumando todos los visitantes (0 = sin tope)
+CHAT_GLOBAL_LIMIT_PER_MIN = int(os.getenv("CHAT_GLOBAL_LIMIT_PER_MIN", "120"))
 SITE_NAME = os.getenv("SITE_NAME", "PokéDex TCG")
 EXPOSE_DOCS = _env_bool("EXPOSE_DOCS", True)

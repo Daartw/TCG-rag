@@ -7,10 +7,13 @@ Producción: ver Dockerfile / docker-compose.yml
 """
 from __future__ import annotations
 
+import ipaddress
 import time
 from collections import defaultdict, deque
 from contextlib import asynccontextmanager
 from threading import Lock
+from typing import Literal
+from urllib.parse import urlsplit
 
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -22,7 +25,8 @@ from pydantic import BaseModel, Field
 from src.agent import handle_query
 from src.catalog import Catalog
 from src.config import (
-    BASE_DIR, CHAT_RATE_LIMIT_PER_MIN, CORS_ORIGINS, EXPOSE_DOCS, IMAGE_BASE_URL, IMAGES_DIR, SITE_NAME,
+    BASE_DIR, CHAT_GLOBAL_LIMIT_PER_MIN, CHAT_RATE_LIMIT_PER_MIN, CORS_ORIGINS, EXPOSE_DOCS, IMAGE_BASE_URL,
+    IMAGES_DIR, REMOTE_IMAGE_BASE, SITE_NAME,
 )
 from src.llm_client import llm_available, model_name, provider
 from src.tools.price_api import get_card_price
@@ -60,11 +64,42 @@ app.add_middleware(CORSMiddleware, allow_origins=CORS_ORIGINS, allow_methods=["G
                    allow_headers=["*"])
 
 
+def _content_security_policy() -> str:
+    """El sitio solo carga sus propios scripts; estilos y fuentes propios o de Google Fonts,
+    e imágenes propias o del CDN de cartas. Así, aunque un dato externo trajera HTML malicioso,
+    el navegador no ejecutaría scripts ajenos ni enviaría datos a otros dominios."""
+    image_sources = {"'self'", "data:", REMOTE_IMAGE_BASE}
+    if IMAGE_BASE_URL.startswith(("http://", "https://")):
+        parts = urlsplit(IMAGE_BASE_URL)
+        image_sources.add(f"{parts.scheme}://{parts.netloc}")
+    return "; ".join([
+        "default-src 'self'",
+        "script-src 'self'",
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+        "font-src 'self' https://fonts.gstatic.com",
+        "img-src " + " ".join(sorted(image_sources)),
+        "connect-src 'self'",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+        "frame-ancestors 'none'",
+    ])
+
+
+CSP = _content_security_policy()
+# La documentación interactiva (Swagger UI) carga sus recursos desde un CDN, por eso queda fuera de la CSP.
+_CSP_EXEMPT = ("/api/docs", "/api/openapi.json")
+
+
 @app.middleware("http")
 async def security_headers(request: Request, call_next):
     response = await call_next(request)
     response.headers.setdefault("X-Content-Type-Options", "nosniff")
     response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
+    response.headers.setdefault("X-Frame-Options", "DENY")
+    response.headers.setdefault("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=()")
+    if not request.url.path.startswith(_CSP_EXEMPT):
+        response.headers.setdefault("Content-Security-Policy", CSP)
     if request.url.path.startswith("/api/") and request.method == "GET" and response.status_code == 200:
         response.headers.setdefault("Cache-Control", "public, max-age=300")
     return response
@@ -77,31 +112,63 @@ def catalog() -> Catalog:
     return cat
 
 
-# --- rate limit simple en memoria (por IP) ---------------------------------
+# --- rate limit simple en memoria (por IP + tope global) --------------------
 _hits: dict[str, deque] = defaultdict(deque)
+_global_hits: deque = deque()
 _hits_lock = Lock()
+_MAX_TRACKED_CLIENTS = 50_000
+_WINDOW_SECONDS = 60
 
 
 def client_ip(request: Request) -> str:
-    """IP del cliente. Detrás de Caddy se usa el ÚLTIMO valor de X-Forwarded-For, que lo agrega
-    el propio proxy: el primero lo puede inventar el cliente para saltarse el límite de consultas."""
-    forwarded = [ip.strip() for ip in request.headers.get("x-forwarded-for", "").split(",") if ip.strip()]
-    if forwarded:
-        return forwarded[-1]
-    return request.client.host if request.client else "?"
+    """Identificador del cliente para el límite de consultas.
+
+    Se usa la IP que entrega el servidor (uvicorn), que solo acepta X-Forwarded-For cuando la
+    conexión viene de un proxy de confianza (FORWARDED_ALLOW_IPS, ver scripts/start.sh). La
+    cabecera no se lee aquí: si la app queda expuesta sin proxy, un cliente podría inventarla
+    para saltarse el límite. Las direcciones IPv6 se agrupan por su red /64, porque un mismo
+    cliente dispone de millones de direcciones dentro de ella.
+    """
+    host = request.client.host if request.client else "?"
+    try:
+        ip = ipaddress.ip_address(host)
+    except ValueError:
+        return host
+    if ip.version == 6:
+        if ip.ipv4_mapped:
+            return str(ip.ipv4_mapped)
+        return f"{ipaddress.ip_network(f'{ip}/64', strict=False).network_address}/64"
+    return str(ip)
+
+
+def _too_many(message: str) -> HTTPException:
+    return HTTPException(429, message, headers={"Retry-After": str(_WINDOW_SECONDS)})
 
 
 def check_rate_limit(request: Request):
-    if CHAT_RATE_LIMIT_PER_MIN <= 0:
+    if CHAT_RATE_LIMIT_PER_MIN <= 0 and CHAT_GLOBAL_LIMIT_PER_MIN <= 0:
         return
     ip, now = client_ip(request), time.time()
     with _hits_lock:
-        q = _hits[ip]
-        while q and now - q[0] > 60:
-            q.popleft()
-        if len(q) >= CHAT_RATE_LIMIT_PER_MIN:
-            raise HTTPException(429, "Demasiadas consultas seguidas. Espera un minuto e inténtalo de nuevo.")
-        q.append(now)
+        if CHAT_RATE_LIMIT_PER_MIN > 0:
+            if len(_hits) > _MAX_TRACKED_CLIENTS:
+                # acota la memoria: descarta los clientes sin consultas recientes
+                for key in [k for k, v in _hits.items() if not v or now - v[-1] > _WINDOW_SECONDS]:
+                    del _hits[key]
+            q = _hits[ip]
+            while q and now - q[0] > _WINDOW_SECONDS:
+                q.popleft()
+            if len(q) >= CHAT_RATE_LIMIT_PER_MIN:
+                raise _too_many("Demasiadas consultas seguidas. Espera un minuto e inténtalo de nuevo.")
+        if CHAT_GLOBAL_LIMIT_PER_MIN > 0:
+            # tope total del asistente: protege la cuota del LLM aunque el abuso venga de muchas IP
+            while _global_hits and now - _global_hits[0] > _WINDOW_SECONDS:
+                _global_hits.popleft()
+            if len(_global_hits) >= CHAT_GLOBAL_LIMIT_PER_MIN:
+                raise _too_many("El asistente está recibiendo muchas consultas. Inténtalo de nuevo en un minuto.")
+            _global_hits.append(now)
+        if CHAT_RATE_LIMIT_PER_MIN > 0:
+            _hits[ip].append(now)
 
 
 # --- endpoints -------------------------------------------------------------
@@ -177,7 +244,7 @@ def card_price(card_id: str):
 
 
 class ChatMessage(BaseModel):
-    role: str
+    role: Literal["user", "assistant"]
     content: str = Field(max_length=4000)
 
 
