@@ -21,6 +21,13 @@ Responderé dentro de 7 días y te mantendré informado hasta que se publique la
 - No definas `FORWARDED_ALLOW_IPS=*` si la app es accesible sin pasar por tu proxy: permitiría falsear la IP y saltarse el límite del chat.
 - Mantén `WEB_CONCURRENCY=1`, o mueve el límite de consultas a un almacén compartido (Redis) si necesitas más procesos.
 
+## Riesgo aceptado: chromadb
+
+`chromadb` (hasta la 1.5.9) tiene avisos críticos sin versión corregida (PYSEC-2026-311, -3813, -3814 y -3815)
+que afectan a su **servidor HTTP** y a su capa de autorización. Este proyecto usa Chroma en modo embebido
+(`PersistentClient`), sin levantar ese servidor, por lo que no queda expuesto. **No ejecutes `chroma run`
+ni publiques el servidor de Chroma** junto a esta aplicación, y actualiza `chromadb` en cuanto exista corrección.
+
 ## Medidas implementadas
 
 - **Content Security Policy**: el sitio solo ejecuta sus propios scripts; `X-Frame-Options`, `nosniff`, `Referrer-Policy` y `Permissions-Policy` en todas las respuestas, y HSTS en Caddy.

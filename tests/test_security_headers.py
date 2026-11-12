@@ -22,9 +22,10 @@ def test_security_headers_on_every_response(client):
 
 def test_content_security_policy_only_allows_own_scripts(client):
     csp = client.get("/").headers["content-security-policy"]
-    assert "script-src 'self'" in csp and "'unsafe-eval'" not in csp
-    assert "frame-ancestors 'none'" in csp and "object-src 'none'" in csp
-    assert "https://images.pokemontcg.io" in csp
+    directives = {d.split()[0]: d.split()[1:] for d in csp.split("; ")}
+    assert directives["script-src"] == ["'self'"]
+    assert directives["frame-ancestors"] == ["'none'"] and directives["object-src"] == ["'none'"]
+    assert set(directives["img-src"]) == {"'self'", "data:", "https://images.pokemontcg.io"}
     # sin manejadores de eventos en línea, que la política bloquearía
     assert "onerror=" not in client.get("/static/app.js").text
     assert "content-security-policy" in client.get("/api/health").headers
