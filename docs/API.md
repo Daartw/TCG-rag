@@ -46,4 +46,5 @@ Pregunta al asistente.
 
 - `message`: 1 a 600 caracteres. `history`: hasta 12 mensajes previos `{ "role", "content" }`.
 - Respuesta: texto del asistente, cartas usadas como contexto y `intent` (`rag` o `price`).
-- Límite por IP: `CHAT_RATE_LIMIT_PER_MIN` consultas por minuto (responde `429` al superarlo).
+- Límite por IP: `CHAT_RATE_LIMIT_PER_MIN` consultas por minuto, más un tope total `CHAT_GLOBAL_LIMIT_PER_MIN` (responde `429` con `Retry-After` al superarlos).
+- `history` solo admite los roles `user` y `assistant`.

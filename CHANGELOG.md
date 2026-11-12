@@ -2,6 +2,19 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 
+## [Sin publicar]
+
+### Seguridad
+- Content Security Policy, `X-Frame-Options` y `Permissions-Policy` en todas las respuestas.
+- El límite del chat ya no lee `X-Forwarded-For` directamente: usa la IP resuelta por uvicorn, que
+  solo confía en proxies de redes privadas (`FORWARDED_ALLOW_IPS`).
+- Las direcciones IPv6 se agrupan por red /64 en el límite del chat y se agrega un tope global
+  (`CHAT_GLOBAL_LIMIT_PER_MIN`).
+- El historial del chat solo acepta los roles `user` y `assistant`.
+- El frontend no usa manejadores de eventos en línea y solo enlaza URLs `http(s)`.
+- CI: auditoría de dependencias (`pip-audit`) y análisis estático con CodeQL.
+- docker-compose: el contenedor de la app se ejecuta sin capacidades de Linux ni escalada de privilegios.
+
 ## [1.0.0] — 2026-10-27
 
 ### Agregado
