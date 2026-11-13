@@ -5,7 +5,7 @@
 #   docker run -p 8000:8000 --env-file .env tcg-rag
 #
 # Para una imagen liviana que indexe al primer arranque: --build-arg BUILD_INDEX=false
-FROM python:3.12-slim
+FROM python:3.15-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
